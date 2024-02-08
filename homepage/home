@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body  {
+  background-repeat: no-repeat;
+  background-image: url("IMG_8347.heic");
+  background-color: #cccccc;
+  background-size: 175%;
+  background-position: center;
+  background-attachment: fixed;
+</style>
+</head>
+<body>
+</body>
+</html>
