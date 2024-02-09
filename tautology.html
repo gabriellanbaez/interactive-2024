@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background-repeat: no-repeat;
+      background-color: white;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    p {
+      font-size: 200px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+    <br>
+    <br>
+    <a href="#" onclick="openMultiplePopups('tautology2.html', 10);"><p>TAUTOLOGY</p></a>
+  </h1>
+
+  <script type="text/javascript">
+    // Array to store references to pop-up windows
+    var popupWindows = [];
+
+    // Function to open multiple pop-ups
+    function openMultiplePopups(url, count) {
+    var width = 100;  // Set the width of the pop-ups
+      var height = 100; // Set the height of the pop-ups
+
+      for (var i = 0; i < count; i++) {
+        var leftPosition = i * 200;
+        var topPosition = i * 100;
+
+        var popupWindow = window.open(
+          url, 'popUpWindow' + i, 'height=' + height + ',width=' + width+ ',left=' + leftPosition + ',top=' + topPosition +
+          ',resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=yes'
+        );
+
+        // Add reference to the array
+        popupWindows.push(popupWindow);
+      }
+    }
+  </script>
+</html>
