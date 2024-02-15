@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+<style>:
+host {
+background-image: repeating-linear-gradient( 225deg, #ffffff 0%, #02ff00 16.666666666666668%, #02ff00 16.666666666666664%, #946cfd 33.333333333333336%, #946cfd 33.333333333333336%, #ffffff 50.00000000000001%, #ffffff 50%);
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+margin: auto;
+background-position: 0 0;
+background-size: 200% 200%;
+will-change: background-position, background-image;
+animation: slideAnimation 7.510000000000002s linear infinite normal;
+}
+
+@keyframes slideAnimation {
+0% {
+background-position: 100% 0%;
+}
+100% {
+background-position: 0% 100%;
+}
+</style>
+<div class="gradient"></div>
+<body>
+</body>
+</html>

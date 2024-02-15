@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(45deg, darkblue, darkblue, black, black);
+      background-size: 400% 400%;
+      animation: gradientAnimation 60s infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .stars-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .star,
+    .shooting-star {
+      position: absolute;
+      background-color: #fff;
+      width: 2px;
+      height: 2px;
+      animation-timing-function: linear;
+    }
+    .star {
+      position: absolute;
+      background-color: #fff;
+      width: 2px;
+      height: 2px;
+      animation: shimmer 1.5s infinite linear;
+    }
+    .shooting-star {
+      animation: shootingStar linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes shimmer {
+      0% {
+        opacity: 0.8;
+      }
+      50% {
+        opacity: 0.2;
+      }
+      100% {
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes shootingStar {
+      0%, 100% {
+        opacity: 0;
+        transform: translateX(100vw) translateY(-100vh) rotate(-45deg);
+      }
+      10%, 90% {
+        opacity: 1;
+        transform: translateX(-100vw) translateY(100vh)rotate(45deg);
+      }
+    }
+
+    /* Generate stars dynamically with JavaScript */
+    </style>
+  <title>Shimmering Stars</title>
+</head>
+<body>
+  <div class="stars-container"></div>
+
+  <script>
+    const container = document.querySelector('.stars-container');
+
+    // Generate stars dynamically
+    for (let i = 0; i < 800; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 2}s`;
+      container.appendChild(star);
+    }
+     for (let i = 0; i < 10; i++) {
+      const shootingStar = document.createElement('div');
+      shootingStar.classList.add('shooting-star');
+      shootingStar.style.top = `${Math.random() * 100}%`;
+      shootingStar.style.left = `${Math.random() * 100}%`;
+      shootingStar.style.animationDuration = `${Math.random() * 3 + 50}s`;
+      shootingStar.style.animationDelay = `${Math.random() * 3}s`;
+      container.appendChild(shootingStar);
+    }
+  </script>
+  </style>
+  <title>Moving Gradient</title>
+</head>
+<body>
+  <div class="star_5"></div>
+  <!-- <h1>Hello, Moving Gradient!</h1> -->
+</body>
+</html>
