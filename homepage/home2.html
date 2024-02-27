@@ -86,6 +86,7 @@ function dragElement(elmnt) {
     pos4 = e.clientY;
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
+    event.stopPropagation();
   }
 
   function elementDrag(e) {
