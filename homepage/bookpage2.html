@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body  {
+  background-repeat: no-repeat;
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+p {
+  font-size: 30px;
+  color: white;
+}
+
+.image-container {
+  perspective: 1000px;
+}
+
+.image {
+  transform-style: preserve-3d;
+  transition: .3s;
+}
+
+&:hover img {
+  transform: rotate(0);
+}
+
+.text {
+  column-count: 1;
+}
+</style>
+</head>
+<body>
+ <!--  <a href="https://www.example.com"> <!-- Link for the first image -->
+    <!-- <img src="Sexo Sucio.png" style="width: 30vw; height: 30vh;">
+  </a>
+  <a href="https://www.gabriellanbaez.com/book" style="width: 50vh; height: 10vh; position: absolute; left: 30px; top: 100px;"></a> --> -->
+
+<div id="image-container" class="image-container">
+  <script>
+    // Function to generate a random position within the specified range
+    function getRandomPosition(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Array of image sources and corresponding links
+    const imageLinks = [
+      { src: "Baez_VIST-18b.png", link: "https://www.gabriellanbaez.com/book" },
+      { src: "Baez_VIST-19.png", link: "https://www.gabriellanbaez.com/book" },
+      { src: "Baez_VIST-18c.png", link: "https://www.gabriellanbaez.com/book" },
+      { src: "edit4.png", link: "https://www.gabriellanbaez.com/book" },
+      { src: "Baez_VIST-13.png", link: "https://www.gabriellanbaez.com/book" },
+      { src: "Baez_VIST-14.png", link: "https://www.gabriellanbaez.com/book" },
+      { src: "Sexo Sucio.png", link: "https://www.gabriellanbaez.com/book" }
+    ];
+
+    // Loop through the images and set random positions
+    imageLinks.forEach((imageLink, index) => {
+      const image = new Image();
+      image.src = imageLink.src;
+
+      // Set random positions for each image
+      const positionTop = getRandomPosition(100, 500);
+      const positionLeft = getRandomPosition(100, 800);
+
+      image.classList.add("image");
+      image.style.width = index === 0 ? "30vw" : "40vw";
+      image.style.height = "50vh";
+      image.style.position = "absolute";
+      image.style.top = `${positionTop}px`;
+      image.style.left = `${positionLeft}px`;
+      image.style.transform = `rotate(${getRandomPosition(-20, 20)}deg)`;
+
+      // Create an anchor tag for each image with the specified link
+      const link = document.createElement("a");
+      link.href = imageLink.link;
+      link.appendChild(image);
+
+      document.getElementById("image-container").appendChild(link);
+    });
+  </script>
+</div>
+
+<!-- Your existing content -->
+
+</body>
+</html>
