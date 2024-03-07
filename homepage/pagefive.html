@@ -14,6 +14,148 @@ body  {
 </style>
 <!-- <a href="fourthpage/fourthpage.html"><img src="Scan.png" style="position: absolute; top: 00px; right: 75px; left:200px; width:900px; height:2000px;"></a> -->
 <!-- <a href="home.html"><img src="Lagentedeprimida_GabriellaNBaez_298.png" style="position: absolute; left: 40px; top: 30px; width:70px; height:100px; transform: rotate(-30deg)"></a>  -->
+<!-- h1 {
+            background: fuchsia;
+            font
+            /*background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+            background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);*/
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+        }
+
+        #toolbar {
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            width: 50px;
+            background-color: transparent;
+        }
+
+        #toolbar * {
+            margin-bottom: 6px;
+        }
+
+        #toolbar h1 {
+/*            font-size: 10px;*/
+        }
+
+        #toolbar button {
+            background-color: transparent;
+            border: none;
+/*            border-radius: 4px;*/
+            color: black;
+            padding: 1px;
+            font-size: 8px;
+            top: 0px;
+        } -->
+    </style>
+</head>
+<body>
+    <section class="container">
+        <div id="toolbar">
+            <!-- <h1>La gente deprimida tiene sexo sucio y ganas de morir</h1> -->
+          <!--   <label for="stroke">Stroke</label>
+            <input id="stroke" name='stroke' type="color">
+            <button id="clear">Clear</button> -->
+        </div>
+        <div class="drawing-board">
+            <canvas id="drawing-board"></canvas>
+        </div>
+    </section>
+    <script src="./index.js"></script>
+    <script>
+        const canvas = document.getElementById('drawing-board');
+        const toolbar = document.getElementById('toolbar');
+        const ctx = canvas.getContext('2d');
+
+        let isPainting = false;
+        let drawingData = [];
+
+        // Retrieve drawing data from localStorage
+        const storedDrawingData = localStorage.getItem('drawingData');
+        if (storedDrawingData) {
+            drawingData = JSON.parse(storedDrawingData);
+        }
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.strokeStyle = '#FF00FF';
+
+        toolbar.addEventListener('click', e => {
+            if (e.target.id === 'clear') {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawingData = [];
+                // Clear drawing data from localStorage
+                localStorage.removeItem('drawingData');
+            }
+        });
+
+        toolbar.addEventListener('change', e => {
+            if (e.target.id === 'stroke') {
+                ctx.strokeStyle = e.target.value;
+            }
+        });
+
+        const draw = (x, y) => {
+            ctx.lineWidth = 1; // Fixed line width
+            ctx.lineCap = 'round';
+
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            isPainting = true;
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            ctx.beginPath(); // Start a new path
+            drawingData.push({ x, y });
+            // Save drawing data to localStorage
+            localStorage.setItem('drawingData', JSON.stringify(drawingData));
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isPainting = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isPainting) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                draw(x, y);
+                drawingData.push({ x, y });
+                // Save drawing data to localStorage
+                localStorage.setItem('drawingData', JSON.stringify(drawingData));
+            }
+        });
+
+        const redraw = () => {
+    const currentStrokeColor = ctx.strokeStyle; // Save the current stroke color
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = currentStrokeColor; // Restore the stroke color
+    drawingData.forEach(point => {
+        draw(point.x, point.y);
+    });
+};
+
+        // Redraw the saved drawing when the window size changes
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            redraw();
+        });
+
+        // Initial drawing on page load
+        redraw();
+    </script>
 <br>
 <br>
 <br>
