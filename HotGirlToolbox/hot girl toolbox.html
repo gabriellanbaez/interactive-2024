@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body  {
+  /*background-image: url("000059030002.jpg");*/
+  background-color: transparent;
+  background-size: auto;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat:no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.image-container {
+  width: 400px;
+  height: 400px;
+ /* top: 200px;
+  left: 550px;*/
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("64758177.png");
+  background-size: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image-container:hover::before {
+  background-image: url("64758177copy.png"); /* Hover image */
+}
+
+</style>
+</head>
+<body>
+<br>
+</p>
+<a href="ToolIndex.html" style="text-align: center;">
+<div class="image-container">
+</div>
+
+</body>
+</html>

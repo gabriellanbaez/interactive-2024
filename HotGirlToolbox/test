@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background-color: #f0f0f0;
+    margin: 0;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.text-container {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+}
+
+.text-container h1 {
+    font-size: 30px;
+    color: fuchsia;
+}
+
+.box {
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+    background-color: #007bff;
+    mix-blend-mode: screen; /* Apply screen blend mode */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content {
+    height: 2000px; /* For scrolling */
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="text-container">
+        <h1>Hola bebé, ¿con qué estamos bregando hoy?</h1>
+    </div>
+    <div class="box"></div>
+</div>
+
+<div class="content"></div>
+
+<script>
+window.addEventListener('scroll', function() {
+    var box = document.querySelector('.box');
+    var rect = box.getBoundingClientRect();
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // If box is in view
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+        // Apply blend mode
+        box.style.mixBlendMode = 'screen';
+    } else {
+        // Reset blend mode
+        box.style.mixBlendMode = 'normal';
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Generator</title>
+<style>
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <h1>calculadora</h1>
+  <form id="invoiceForm">
+    <label for="clientName">Nombre de cliente:</label>
+    <input type="text" id="clientName" name="clientName" required>
+    <label>&#191;Qu&eacute; tareas hiciste hoy?:</label>
+    <label><input type="checkbox" name="item" value="75"> Instalaci&oacute;n de abanico</label>
+    <label><input type="checkbox" name="item" value="50"> Instalaci&oacute;n de l&aacute;mpara peque&ntilde;a</label>
+    <label><input type="checkbox" name="item" value="75"> Instalaci&oacute;n de l&aacute;mpara grande</label>
+    <label><input type="checkbox" name="item" value="50"> Instalaci&oacute;n de barrenado</label>
+    <button type="button" onclick="generateInvoice()">Crear Factura</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@^1.10.0/dist/pdf-lib.js"></script>
+  <script>
+async function generateInvoice() {
+  const clientName = document.getElementById('clientName').value;
+  console.log('Client Name:', clientName);
+  
+  const items = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(item => parseFloat(item.value));
+  console.log('Selected Items:', items);
+
+  // Calculate the total value
+  const totalValue = items.reduce((acc, currentValue) => acc + currentValue, 0);
+  console.log('Total Value:', totalValue);
+
+  // Create a new PDF document
+  const pdfDoc = await PDFLib.PDFDocument.create();
+  const page = pdfDoc.addPage([600, 800]);
+  const { width, height } = page.getSize();
+
+  // Add content to the PDF
+  const contentStream = PDFLib.drawLinesOfText(items.map(item =>
+    `${item}`
+  ), {
+    x: 50,
+    y: height - 50,
+    font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
+    size: 20,
+  });
+
+  page.addDrawnContent(contentStream);
+
+  // Add client name and total value
+  page.drawText(`Invoice for: ${clientName}`, {
+    x: 50,
+    y: height - 100,
+    font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
+    size: 30,
+    color: PDFLib.rgb(0, 0, 0),
+  });
+
+  page.drawText(`Total: $${totalValue.toFixed(2)}`, {
+    x: 50,
+    y: height - 130,
+    font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
+    size: 20,
+    color: PDFLib.rgb(0, 0, 0),
+  });
+
+  // Save the PDF to a Blob
+  const pdfBytes = await pdfDoc.save();
+
+  // Download the PDF
+  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.download = 'invoice.pdf';
+  link.click();
+}
+  </script>
+</body>
+</html>

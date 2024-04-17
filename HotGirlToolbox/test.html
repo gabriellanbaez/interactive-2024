@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background-color: transparent;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Hide overflowed content */
+    position: relative;
+    background-attachment: scroll;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.text-container {
+    position: fixed;
+    z-index: -1; /* Set the z-index behind other content */
+    text-align: center;
+    color: rgba(0, 0, 0, 0.1); /* Transparent color for faint effect */
+}
+
+.text-container p {
+    font-size: 100px; /* Set a large font size */
+    margin: 0; /* Remove default margin */
+}
+
+.box {
+    position: absolute;
+    z-index: 2;
+    width: 800px;
+    height: 200px;
+    background-color: transparent;
+    mix-blend-mode: screen; /* Apply screen blend mode */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content {
+    overflow-y: auto;
+    max-height: calc(100vh - 100px); /* Adjust this value based on the size of the box and text container */
+    margin-top: 100px; /* Adjust this value to ensure content starts after the text container and box */
+    padding: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hola beb&eacute;, &#191;con qu&eacute; estamos bregando hoy?</h1>
+    <div class="box"></div>
+</div>
+
+<div class="text-container">
+    <p>Infraestructura</p>
+    <p>El&eacute;ctrico</p>
+    <p>Carro</p>
+    <p>Muebles</p>
+    <p>Jard&iacute;n</p>
+    <p>Decoraci&oacuten;</p>
+    <p>Upcycle/DIY</p>
+    <p>Tape Measurer</p>
+    <p>Hot Glue</p>
+</div>
+
+<div class="content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum magna non arcu condimentum posuere. Sed condimentum magna non arcu condimentum posuere.</p>
+    <p>Suspendisse potenti. Nulla ut ex lobortis, dapibus lorem vel, malesuada nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+    <p>Phasellus consectetur eleifend leo, sit amet mattis enim feugiat at. Aenean nec sodales mauris. Vivamus id malesuada neque, nec efficitur urna.</p>
+    <!-- More content -->
+</div>
+
+<script>
+window.addEventListener('scroll', function() {
+    var box = document.querySelector('.box');
+    var rect = box.getBoundingClientRect();
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // If box is in view
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+        // Apply blend mode
+        box.style.mixBlendMode = 'screen';
+    } else {
+        // Reset blend mode
+        box.style.mixBlendMode = 'normal';
+    }
+});
+</script>
+
+</body>
+</html>
+

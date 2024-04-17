@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Title Here</title>
+  <style>
+    body {
+      background-color: transparent;
+      background-size: auto;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      overflow-y: auto;
+      font-family: "Times New Roman", sans-serif;
+    }
+
+    .text-container {
+      text-align: center;
+      font-size: 200px;
+      color: fuchsia;
+      line-height: 0.5;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #333333;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "signalcompressedregularTRIAL";
+      src: url("signalcompressedregularTRIAL.otf") format("opentype");
+    }
+
+    /* Media Queries for responsiveness */
+    @media screen and (max-width: 768px) {
+      .text-container {
+        font-size: 100px; /* Adjust font size for smaller screens */
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .text-container {
+        font-size: 80px; /* Adjust font size for even smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container">
+    <p>Estructura</p>
+    <p>Eléctrico</p>
+    <p>Mecánico</p>
+    <p>Muebles</p>
+    <p>Jardín</p>
+    <p>Decoración</p>
+    <p>Upcycle/DIY</p>
+  </div>
+</body>
+</html>
