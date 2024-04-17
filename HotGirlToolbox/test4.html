@@ -3,31 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invoice Generator</title>
+<title>calculadora</title>
 <style>
   label {
     display: block;
     margin-bottom: 5px;
+    font-family: Arial, sans-serif;
   }
   input[type="text"], input[type="number"] {
-    width: 100%;
+     width: calc(30% - 20px);
     margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    outline: none;
+    vertical-align: middle;
+    display: inline-block;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  h1 {
+    inline-flex; text-align: center; 
+    justify-content: center; 
+    align-items: center; 
+    line-height: 100%; 
+    width: calc(20% - 20px);
+    padding: 4.4px; 
+    font-size: 30px; 
+    font-style: oblique; 
+    font-family: cursive; 
+    color: magenta;
+    fill: transparent;
+    text-shadow: magenta 0px .5px .5px; 
+    text-decoration-style: solid;
   }
   button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+    align-items: center; 
+    line-height: 100%; 
+    width: calc(15% - 20px);
+    padding: 4.4px; 
+    font-size: 15px; 
+    font-style: oblique; 
+    font-family: cursive; 
+    color: magenta;
+    fill: transparent;
+    border: 4px solid magenta; 
+    border-radius: 12px; 
+    text-shadow: magenta 0px 2px 3px; 
+    text-decoration: underline; 
+    text-decoration-style: solid;
+    background-color: transparent;
   }
 </style>
 </head>
 <body>
-  <h1>calculadora</h1>
+  <h1>CALCULADORA</h1>
   <form id="invoiceForm">
-    <label for="clientName">Nombre de cliente:</label>
-    <input type="text" id="clientName" name="clientName" required>
+    <label for="clientName">Nombre de cliente:</label><input type="text" id="clientName" name="clientName" required>
+    <label for="taskDate">Fecha de hoy:</label><input type="text" id="taskDate" name="taskDate" required>
+    <br>
+    <br>
     <label>&#191;Qu&eacute; tareas hiciste hoy?:</label>
+    <br>
     <label><input type="checkbox" name="item" value="75"> Instalaci&oacute;n de abanico</label>
     <label><input type="checkbox" name="item" value="50"> Instalaci&oacute;n de l&aacute;mpara peque&ntilde;a</label>
     <label><input type="checkbox" name="item" value="75"> Instalaci&oacute;n de l&aacute;mpara grande</label>
@@ -37,79 +80,88 @@
     <label><input type="checkbox" name="item" value="25"> Visita a ferreter&iacute;a</label>
     <label><input type="checkbox" name="item" value="140"> Servicios de pintura (7hrs)</label>
     <label><input type="checkbox" name="item" value="500"> Poda de &aacute;rbol con ayudante</label>
-    <label><input type="checkbox" name="item" value="500"> Plomer&iacute;a b&aacute;sica</label>
-    <label><input type="checkbox" name="item" value="500"> Instalaci&oacute;n de puertas</label>
-    <label><input type="checkbox" name="item" value="500"> Instalaci&oacute;n de ventanas</label>
-    <label><input type="checkbox" name="item" value="500"> Ensamblaje de muebles</label>
-    <label><input type="checkbox" name="item" value="500"> Servicios de electricidad</label>
-    <label><input type="checkbox" name="item" value="500"> Ensamblaje de muebles</label>
-    <label><input type="checkbox" name="item" value="500"> Mec&aacute;nica b&aacute;sica</label>
-    <label><input type="checkbox" name="item" value="500"> Cambio de aceite y filtro</label>
-    <label><input type="checkbox" name="item" value="500"> Labor emocional (mucha)</label>
-    <label><input type="checkbox" name="item" value="500"> Labor emocional (extrema)</label>
-    <label><input type="checkbox" name="item" value="500"> Cancelaciones</label>
-
-
-    <button type="button" onclick="generateInvoice()">Crear Factura</button>
+    <label><input type="checkbox" name="item" value="60"> Plomer&iacute;a b&aacute;sica</label>
+    <label><input type="checkbox" name="item" value="50"> Ensamblaje de muebles</label>
+    <label><input type="checkbox" name="item" value="80"> Servicios de electricidad</label>
+    <label><input type="checkbox" name="item" value="60"> Ensamblaje de muebles</label>
+    <label><input type="checkbox" name="item" value="100"> Mec&aacute;nica b&aacute;sica</label>
+    <label><input type="checkbox" name="item" value="20"> Cambio de aceite y filtro (materiales prove&iacute;dos)</label>
+    <label><input type="checkbox" name="item" value="40"> Cambio de aceite y filtro (materiales comprados)</label>
+   <label data-hidden><input type="checkbox" name="item" value="5"> Labor emocional (mucha)</label>
+   <label data-hidden><input type="checkbox" name="item" value="10"> Labor emocional (extrema)</label>
+  <label><input type="checkbox" name="item" value="25"> Cancelaciones</label>
+  <label><input type="checkbox" id="customTaskCheckbox"> Otra tarea y/o gastos adicionales:</label>
+     <input type="number" id="customTaskValue" disabled>
+<br>
+<br>
+    <button type="button" onclick="generateInvoice()">Crear Factura</button></div>
   </form>
+   <p id="invoice"></p>
+  <textarea id="modifiedInvoice" style="width: 20%; height: 100px;"></textarea>
+  <br> 
+  <br>
+   <br> 
+  <br>
+   <br> 
+  <br>
+  <p><i>calculadora</i> fue creado por <a href="http://gabriellanbaez.com">Gabriella N. B&aacute;ez</a> para Puma. 
+    <br>Puma es un handyman que trabaja y ofrece servicios en San Juan, Puerto Rico.
+    <br>Para contrataciones favor llamar al +1(787) 234-8199.</p>
 
-  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@^1.10.0/dist/pdf-lib.js"></script>
-  <script>
-async function generateInvoice() {
-  const clientName = document.getElementById('clientName').value;
-  console.log('Client Name:', clientName);
-  
-  const items = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(item => parseFloat(item.value));
-  console.log('Selected Items:', items);
-
-  // Calculate the total value
-  const totalValue = items.reduce((acc, currentValue) => acc + currentValue, 0);
-  console.log('Total Value:', totalValue);
-
-  // Create a new PDF document
-  const pdfDoc = await PDFLib.PDFDocument.create();
-  const page = pdfDoc.addPage([600, 800]);
-  const { width, height } = page.getSize();
-
-  // Add content to the PDF
-  const contentStream = PDFLib.drawLinesOfText(items.map(item =>
-    `${item}`
-  ), {
-    x: 50,
-    y: height - 50,
-    font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
-    size: 20,
+<script>
+document.getElementById("customTaskCheckbox").addEventListener("change", function() {
+    var customTaskValue = document.getElementById("customTaskValue");
+    customTaskValue.disabled = !this.checked;
+    if (!this.checked) {
+      customTaskValue.value = ""; // Clear input field when checkbox is unchecked
+    }
   });
 
-  page.addDrawnContent(contentStream);
+ function generateInvoice() {
+    var clientName = document.getElementById("clientName").value;
+    var taskDate = document.getElementById("taskDate").value;
+    var tasks = document.querySelectorAll('input[type="checkbox"]:checked:not([data-hidden])');
+    var hiddenTasks = document.querySelectorAll('input[type="checkbox"][data-hidden]:checked');
+    var totalCost = 0;
+    var selectedTasks = [];
+    var customTaskCheckbox = document.getElementById("customTaskCheckbox");
+    var customTaskValue = document.getElementById("customTaskValue").value;
 
-  // Add client name and total value
-  page.drawText(`Invoice for: ${clientName}`, {
-    x: 50,
-    y: height - 100,
-    font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
-    size: 30,
-    color: PDFLib.rgb(0, 0, 0),
-  });
+    tasks.forEach(function(task) {
+        selectedTasks.push(task.parentNode.textContent.trim());
+        totalCost += parseInt(task.value);
+    });
 
-  page.drawText(`Total: $${totalValue.toFixed(2)}`, {
-    x: 50,
-    y: height - 130,
-    font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
-    size: 20,
-    color: PDFLib.rgb(0, 0, 0),
-  });
+    hiddenTasks.forEach(function(task) {
+        totalCost += parseInt(task.value);
+    });
 
-  // Save the PDF to a Blob
-  const pdfBytes = await pdfDoc.save();
+    // Include custom task value if checkbox is checked and value is provided
+    if (customTaskCheckbox.checked && customTaskValue.trim() !== "") {
+        if (!isNaN(customTaskValue)) { // Ensure the value is a number
+            selectedTasks.push("Otra tarea: " + customTaskValue);
+            totalCost += parseInt(customTaskValue);
+        } else {
+            alert("Por favor, ingrese un valor numérico para la tarea personalizada.");
+            return; // Exit the function early if the value is not numeric
+        }
+    }
 
-  // Download the PDF
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-  const link = document.createElement('a');
-  link.href = window.URL.createObjectURL(blob);
-  link.download = 'invoice.pdf';
-  link.click();
+    var invoiceHTML = "<h2>Factura</h2>";
+    invoiceHTML += "<p>Cliente: " + clientName + "</p>";
+    invoiceHTML += "<p>Fecha: " + taskDate + "</p>";
+    invoiceHTML += "<p>Tareas realizadas:</p>";
+    invoiceHTML += "<ul>";
+    selectedTasks.forEach(function(task) {
+        invoiceHTML += "<li>" + task + "</li>";
+    });
+    invoiceHTML += "</ul>";
+    invoiceHTML += "<p>Total: $" + totalCost + "</p>";
+    invoiceHTML += "<p><br>Much&iacute;simas gracias!<br>Atentamente,<br>Puma</p>";
+
+    // Display the invoice in an element with ID "invoice"
+    document.getElementById("invoice").innerHTML = invoiceHTML;
 }
-  </script>
+</script>
 </body>
 </html>
