@@ -5,13 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>calculadora</title>
 <style>
+  body {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('background.png');
+    background-size: cover; /* This will make sure the image covers the entire background */
+    background-repeat: no-repeat; /* This will prevent the image from repeating */
+    background-attachment: fixed;
+  }
   label {
     display: block;
     margin-bottom: 5px;
     font-family: Arial, sans-serif;
   }
   input[type="text"], input[type="number"] {
-     width: calc(30% - 20px);
+    width: calc(20% - 20px);
     margin-bottom: 10px;
     border: none;
     border-bottom: 1px solid black;
@@ -19,6 +25,7 @@
     outline: none;
     vertical-align: middle;
     display: inline-block;
+    font-size: 18px;
   }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
@@ -28,6 +35,24 @@
   input[type="number"] {
     -moz-appearance: textfield;
   }
+
+  @keyframes rainbow {
+  0% { color: red; }
+  16.666% { color: orange; }
+  33.333% { color: yellow; }
+  50% { color: green; }
+  66.666% { color: blue; }
+  83.333% { color: indigo; }
+  100% { color: violet; }
+}
+
+.rainbow-text {
+  animation: rainbow 1s infinite;
+}
+#finalText {
+    animation: rainbow 3s linear infinite; /* Adjust duration and timing as needed */
+}
+
   h1 {
     inline-flex; text-align: center; 
     justify-content: center; 
@@ -59,73 +84,151 @@
     text-decoration: underline; 
     text-decoration-style: solid;
     background-color: transparent;
+    display: block;
   }
+#invoice {
+font-family: Arial, sans-serif;
+}
+
+.inline{
+  display:inline-block;
+}
+
 </style>
 </head>
 <body>
   <h1>CALCULADORA</h1>
   <form id="invoiceForm">
-    <label for="clientName">Nombre de cliente:</label><input type="text" id="clientName" name="clientName" required>
-    <label for="taskDate">Fecha de hoy:</label><input type="text" id="taskDate" name="taskDate" required>
+    <label for="clientName" class="inline">Nombre de cliente:<input type="text" id="clientName" name="clientName" required oninput="animateTextColor(this)">
+    <br>
+    <label for="taskDate" class="inline">Fecha de hoy:</label><input type="text" id="taskDate" name="taskDate" required oninput="animateTextColor(this)">
     <br>
     <br>
     <label>&#191;Qu&eacute; tareas hiciste hoy?:</label>
     <br>
-    <label><input type="checkbox" name="item" value="75"> Instalaci&oacute;n de abanico</label>
-    <label><input type="checkbox" name="item" value="50"> Instalaci&oacute;n de l&aacute;mpara peque&ntilde;a</label>
-    <label><input type="checkbox" name="item" value="75"> Instalaci&oacute;n de l&aacute;mpara grande</label>
-    <label><input type="checkbox" name="item" value="50"> Instalaci&oacute;n de barrenado</label>
-    <label><input type="checkbox" name="item" value="70"> Transporte de nevera</label>
-    <label><input type="checkbox" name="item" value="80"> Mudanza</label>
-    <label><input type="checkbox" name="item" value="25"> Visita a ferreter&iacute;a</label>
-    <label><input type="checkbox" name="item" value="140"> Servicios de pintura (7hrs)</label>
-    <label><input type="checkbox" name="item" value="500"> Poda de &aacute;rbol con ayudante</label>
-    <label><input type="checkbox" name="item" value="60"> Plomer&iacute;a b&aacute;sica</label>
-    <label><input type="checkbox" name="item" value="50"> Ensamblaje de muebles</label>
-    <label><input type="checkbox" name="item" value="80"> Servicios de electricidad</label>
-    <label><input type="checkbox" name="item" value="60"> Ensamblaje de muebles</label>
-    <label><input type="checkbox" name="item" value="100"> Mec&aacute;nica b&aacute;sica</label>
-    <label><input type="checkbox" name="item" value="20"> Cambio de aceite y filtro (materiales prove&iacute;dos)</label>
-    <label><input type="checkbox" name="item" value="40"> Cambio de aceite y filtro (materiales comprados)</label>
-   <label data-hidden><input type="checkbox" name="item" value="5"> Labor emocional (mucha)</label>
-   <label data-hidden><input type="checkbox" name="item" value="10"> Labor emocional (extrema)</label>
-  <label><input type="checkbox" name="item" value="25"> Cancelaciones</label>
-  <label><input type="checkbox" id="customTaskCheckbox"> Otra tarea y/o gastos adicionales:</label>
-     <input type="number" id="customTaskValue" disabled>
+    <label><input type="checkbox" name="item" value="75" onchange="showGif()"> Instalaci&oacute;n de abanico</label>
+    <label><input type="checkbox" name="item" value="50" onchange="showGif()"> Instalaci&oacute;n de l&aacute;mpara peque&ntilde;a</label>
+    <label><input type="checkbox" name="item" value="75" onchange="showGif()"> Instalaci&oacute;n de l&aacute;mpara grande</label>
+    <label><input type="checkbox" name="item" value="50" onchange="showGif()"> Instalaci&oacute;n de barrenado</label>
+    <label><input type="checkbox" name="item" value="70" onchange="showGif()"> Transporte de nevera</label>
+    <label><input type="checkbox" name="item" value="80" onchange="showGif()"> Mudanza</label>
+    <label><input type="checkbox" name="item" value="25" onchange="showGif()"> Visita a ferreter&iacute;a</label>
+    <label><input type="checkbox" name="item" value="140" onchange="showGif()"> Servicios de pintura (7hrs)</label>
+    <label><input type="checkbox" name="item" value="500" onchange="showGif()"> Poda de &aacute;rbol con ayudante</label>
+    <label><input type="checkbox" name="item" value="60" onchange="showGif()"> Plomer&iacute;a b&aacute;sica</label>
+    <label><input type="checkbox" name="item" value="50" onchange="showGif()"> Ensamblaje de muebles</label>
+    <label><input type="checkbox" name="item" value="80" onchange="showGif()"> Servicios de electricidad</label>
+    <label><input type="checkbox" name="item" value="60" onchange="showGif()"> Ensamblaje de muebles</label>
+    <label><input type="checkbox" name="item" value="100" onchange="showGif()"> Mec&aacute;nica b&aacute;sica</label>
+    <label><input type="checkbox" name="item" value="20" onchange="showGif()"> Cambio de aceite y filtro (materiales prove&iacute;dos)</label>
+    <label><input type="checkbox" name="item" value="40" onchange="showGif()"> Cambio de aceite y filtro (materiales comprados)</label>
+   <label data-hidden><input type="checkbox" data-hidden name="item" value="5" onchange="showGif()"> Labor emocional (mucha)</label>
+   <label data-hidden><input type="checkbox" data-hidden name="item" value="10" onchange="showGif()"> Labor emocional (extrema)</label>
+   <label data-hidden><input type="checkbox" data-hidden name="item" value="25" onchange="showGif()"> Es gringo</label>
+  <label><input type="checkbox" name="item" value="25" onchange="showGif()"> Cancelaciones</label>
+  <label for="customTaskValue" class="inline"><input type="checkbox" id="customTaskCheckbox" onchange="showCustomTaskInput()" required oninput="animateTextColor(this)"> Otra tarea y/o gastos adicionales:</label>
+  
+<input type="number" id="customTaskValue" disabled>
+     <br>
+     <br>
+     <textarea id="modifiedInvoice" style="width: 20%; height: 50px;"></textarea>
+<br>
 <br>
 <br>
     <button type="button" onclick="generateInvoice()">Crear Factura</button></div>
   </form>
+  <div id="gifContainer" class="gif-container"></div>
+   <br> 
+  <br>
+   <br> 
+  <br>
+   <br> 
+  <br>
    <p id="invoice"></p>
-  <textarea id="modifiedInvoice" style="width: 20%; height: 100px;"></textarea>
   <br> 
   <br>
    <br> 
   <br>
    <br> 
   <br>
-  <p><i>calculadora</i> fue creado por <a href="http://gabriellanbaez.com">Gabriella N. B&aacute;ez</a> para Puma. 
+  <p id="finalText"><i>calculadora</i> fue creado por <a href="http://gabriellanbaez.com">Gabriella N. B&aacute;ez</a> para Puma.
+  <br> 
     <br>Puma es un handyman que trabaja y ofrece servicios en San Juan, Puerto Rico.
-    <br>Para contrataciones favor llamar al +1(787) 234-8199.</p>
+    <br>Para contrataciones favor llamar al +1(787) 234-8199.
+    <br>
+    <br>Gabriella N. B&aacute;ez es artista freelance entre San Juan, Puerto Rico y New Haven, Connecticut.
+    <br>Para contrataciones favor enviar <a href="mailto:gnbr818@gmail.com"> correo electr&oacute;nico.</a></p> 
 
 <script>
-document.getElementById("customTaskCheckbox").addEventListener("change", function() {
-    var customTaskValue = document.getElementById("customTaskValue");
-    customTaskValue.disabled = !this.checked;
-    if (!this.checked) {
-      customTaskValue.value = ""; // Clear input field when checkbox is unchecked
+  function animateTextColor(input) {
+    // Add or remove the 'rainbow-text' class based on input length
+    if (input.value.length > 0) {
+        input.classList.add('rainbow-text'); // Add rainbow effect when there is input
+    } else {
+        input.classList.remove('rainbow-text'); // Remove rainbow effect when input is empty
     }
-  });
+}
+function showCustomTaskInput() {
+    var customTaskCheckbox = document.getElementById("customTaskCheckbox");
+    var customTaskValueInput = document.getElementById("customTaskValue");
+    
+    customTaskValueInput.disabled = !customTaskCheckbox.checked;
+}
+  function showGif() {
+    var gifs = [
+        'glittery-red-glitter-balloons.gif',
+        '4465859.gif.nochecker.gif',
+        '3252975.gif.nochecker.gif',
+        '3947814.gif.nochecker.gif',
+        'fiary-fairy.gif',
+        '4892394.gif.nochecker.gif',
+        '5112579.gif.nochecker.gif',
+        '5375578.gif.nochecker.gif',
+        'red-rose-and-butterflies-sparkles.gif',
+        '5784535.gif.nochecker.gif',
+        '1759840_daa81.gif',
+        '3235190.gif.nochecker.gif',
+        '4579916.gif.nochecker.gif',
+        'glitter-blingee-3.gif',
+        'pretty-angel.gif',
+        '5496879.gif.nochecker.gif',
+    ];
+
+    // Number of GIFs to display
+    var numberOfGifs = 2; // Change this number as per your preference
+
+    for (var i = 0; i < numberOfGifs; i++) {
+        // Select a random GIF from the array
+        var randomIndex = Math.floor(Math.random() * gifs.length);
+        var randomGif = gifs[randomIndex];
+
+        // Create a new image element
+        var gifElement = document.createElement('img');
+        gifElement.src = randomGif;
+
+        // Set the position of the GIF randomly on the page
+        gifElement.style.position = 'absolute';
+        gifElement.style.left = Math.random() * window.innerWidth + 'px';
+        gifElement.style.top = Math.random() * window.innerHeight + 'px';
+
+        // Add the GIF to the GIF container
+        var gifContainer = document.getElementById('gifContainer');
+        gifContainer.appendChild(gifElement);
+    }
+}
 
  function generateInvoice() {
     var clientName = document.getElementById("clientName").value;
     var taskDate = document.getElementById("taskDate").value;
-    var tasks = document.querySelectorAll('input[type="checkbox"]:checked:not([data-hidden])');
+    var tasks = document.querySelectorAll('input[type="checkbox"]:checked:not([data-hidden]):not(#customTaskCheckbox)');
+
     var hiddenTasks = document.querySelectorAll('input[type="checkbox"][data-hidden]:checked');
     var totalCost = 0;
     var selectedTasks = [];
     var customTaskCheckbox = document.getElementById("customTaskCheckbox");
     var customTaskValue = document.getElementById("customTaskValue").value;
+
+    var modifiedInvoice = document.getElementById("modifiedInvoice").value;
 
     tasks.forEach(function(task) {
         selectedTasks.push(task.parentNode.textContent.trim());
@@ -157,7 +260,9 @@ document.getElementById("customTaskCheckbox").addEventListener("change", functio
     });
     invoiceHTML += "</ul>";
     invoiceHTML += "<p>Total: $" + totalCost + "</p>";
-    invoiceHTML += "<p><br>Much&iacute;simas gracias!<br>Atentamente,<br>Puma</p>";
+    invoiceHTML += "<p>Notas adicionales: " +  modifiedInvoice + "</p>";
+    invoiceHTML += "<p><br>&#161Much&iacute;simas gracias!<br><br>Atentamente,<br>Puma</p>";
+    // invoiceHTML += "<p>" +  modifiedInvoice + "</p>";
 
     // Display the invoice in an element with ID "invoice"
     document.getElementById("invoice").innerHTML = invoiceHTML;
